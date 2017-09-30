@@ -9,12 +9,20 @@ div.title-image {
 
 div.users {
     height: 180px;
+    overflow-y:scroll;
 }
 
-div.send {
-    height: 90px;
+div.message {
+    height: 50px;
+    padding-top: 10px;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+div.comment {
+    height: 40px;
 }
 
 div.action {
-    height: 30px;
+    height: 40px;
 }
