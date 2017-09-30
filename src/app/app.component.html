@@ -1,4 +1,25 @@
-<h1>
-  {{title}}
-</h1>
-<router-outlet></router-outlet>
+<!-- main app container -->
+<div class="container">
+  <div class="col-md-12">
+      <alert></alert>
+      <div class ="top-bar" >
+        <a class="name" *ngIf="currentUser" [routerLink]="['/login']"> {{currentUser.username}}</a>
+      </div>
+      <div class="title-image">
+          <img style="width: 57px; height: 45px;" alt="Heart" src="../assets/heart1.jpg">
+          <img style="width: 279px; height: 35px;" alt="Pay It Forward" src="../assets/logo4.png">
+          <img style="width: 57px; height: 45px;" alt="Heart" src="../assets/heart1.jpg">
+      </div>
+      <router-outlet></router-outlet>
+  </div>
+  <div class="col-md-12">
+      <div class ="bottom-bar" ></div>
+  </div>
+</div>
+
+<!-- credits -->
+<div class="text-center">
+  <p>
+      <a href="http://www.nssol.nssmc.com/" target="_top">Copy rights 2017 @NS Solutions. All rights recieved.</a>
+  </p>
+</div>

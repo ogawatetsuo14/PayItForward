@@ -1,0 +1,9 @@
+<h4>登録ユーザ一覧:</h4>
+<table class="table">
+  <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.username}}</td><td>{{user.company}}</td><td>{{user.address}}</td>
+        <td><button class="btn btn-default" (click)="deleteUser(user.email)">削除</button></td>
+      </tr>
+  </tbody>
+</table>

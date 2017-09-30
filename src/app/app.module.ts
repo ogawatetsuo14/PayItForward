@@ -5,10 +5,27 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+import { AlertComponent } from './_directives/alert.component';
+import { AuthGuard } from './_guards/index';
+import { AlertService, AuthenticationService, UserService, ModalService } from './_services/index';
+import { ModalComponent } from './modal/modal.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    AlertComponent,
+    ModalComponent,
+    DialogComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -16,7 +33,16 @@ import { AppComponent } from './app.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    ModalService
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DialogComponent
+  ]
 })
 export class AppModule { }

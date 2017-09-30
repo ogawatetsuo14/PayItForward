@@ -1,0 +1,29 @@
+div.greeting {
+    text-align:right;
+}
+
+div.wallet {
+    text-align: center;
+    height: 348px;
+}
+
+span {
+    text-align:center;
+    font-weight: bold;
+}
+
+div.thanks {
+    text-align: center;
+}
+
+div.good_job {
+    text-align: center;
+}
+
+div.expect_you {
+    text-align: center;
+}
+
+div.genki_ball {
+    text-align: center;
+}

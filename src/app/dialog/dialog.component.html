@@ -1,0 +1,29 @@
+<div class="confirmation">
+    <div class="title-image">
+        <img style="width: 57px; height: 45px;" alt="Heart" src="../assets/heart1.jpg">
+        <img style="width: 279px; height: 35px;" alt="Pay It Forward" src="../assets/logo4.png">
+        <img style="width: 57px; height: 45px;" alt="Heart" src="../assets/heart1.jpg">
+    </div>
+    <div class="col-md-12">
+      <div class="users">
+        <table *ngFor="let user of users; let i=index">
+          <tr>
+            <td (click)="select(i)">{{user.username}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="send">
+        <span *ngIf="username">{{username}}さんに {{type}}コインを　{{amount}}　bitoを送ります。</span><br><br>
+        <label>コメント（任意）　</label>
+        <input type="text" value="いつもありがとう。" style="width: 400px;"><br>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="action">
+        <button class="btn btn-default" (click)="close()">閉じる</button>
+        <button class="btn btn-success" (click)="send()">送　信</button>
+      </div>
+    </div>
+</div>

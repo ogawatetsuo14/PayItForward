@@ -1,0 +1,20 @@
+.confirmation {
+  text-align: center;
+}
+ 
+div.title-image {
+    text-align:center;
+    margin-top: 20px;
+}
+
+div.users {
+    height: 180px;
+}
+
+div.send {
+    height: 90px;
+}
+
+div.action {
+    height: 30px;
+}
