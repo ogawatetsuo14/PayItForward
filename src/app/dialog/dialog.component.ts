@@ -102,7 +102,7 @@ export class DialogComponent {
                 this.alertService.error(error);
                 this.loading = false;
             });
-}
+  }
 
   select(num){
     this.loading = false;

@@ -13,7 +13,8 @@ export class CoinService {
     }
 
     getTranByEmail(email: string){
-      return this.http.get('/api/get'+ email,this.jwt()).map((response:Response) => response.json());
+      console.log("getTranByEmail is fired!!");
+      return this.http.get('/api/getrecords/'+ email,this.jwt()).map((response:Response) => response.json());
     }
 
     // private helper methods

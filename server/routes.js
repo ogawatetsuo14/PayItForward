@@ -39,4 +39,9 @@ router.post('/send', (req, res) => {
   res.status(200).json({"message":"success"});
 });
 
+router.get('/getrecords/:email', (req, res) => {
+  console.log("GET /api/getrecords/" + req.params.email);
+  res.status(200).json([{"datetime":"19:00","from":"abc@gmail.com","to":"abc123@gmail.com","type":"ありがとう","amount":"10","comment":"もっと頑張れ"}]);
+});
+
 module.exports = router;
