@@ -1,8 +1,19 @@
 const User = require('./user.model');
 const ReadPreference = require('mongodb').ReadPreference;
+//const web3Ex = require('./web3ex');
 // const ethService = require('./eth.service');
 
 require('./mongo').connect();
+var web3_extended = require('web3_extended');
+
+var options = {
+  host: 'http://52.187.190.184:22000',
+  personal: true,
+  admin: true,
+  debug: false
+};
+
+var web3Ex = web3_extended.create(options);
 
 function getUsers(req, res) {
   const docquery = User.find({}).read(ReadPreference.NEAREST);
@@ -30,13 +41,50 @@ function getUser(req, res){
     });
 }
 
+function getAddress(req,res){
+  return new Promise(function(resolve,reject) {
+    web3Ex.personal.newAccount(req.params.password,function(error,result){
+      if(!error) {
+        console.log("getAddress is fired!!");
+        console.log(result);
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
+  })
+}
+
+/*
+var postUser = getAddress(req,res)
+  .then((value) => {
+    console.log(value);
+    return value;
+  })
+  .then((value) => {
+    const originalUser = {
+      email: req.body.email, 
+      password: req.body.password, 
+      username: req.body.username ,
+      company: req.body.company , 
+      address: "123456"
+    };
+    const user = new User(originalUser);
+    user.save(error => {
+      if (checkServerError(res, error)) return;
+      res.status(201).json(user);
+      console.log('User created successfully!');
+    });  
+  })
+*/
+
 function postUser(req, res) {
-  const originalUser = { 
+  const originalUser = {
     email: req.body.email, 
     password: req.body.password, 
     username: req.body.username ,
     company: req.body.company , 
-    address: "123456"
+    address: req.body.address
   };
   const user = new User(originalUser);
   user.save(error => {
@@ -45,6 +93,7 @@ function postUser(req, res) {
     console.log('User created successfully!');
   });
 }
+
 
 function putUser(req, res) {
   const originalUser = {
@@ -118,5 +167,6 @@ module.exports = {
   postUser,
   putUser,
   deleteUser,
-  authenticate
+  authenticate,
+  getAddress
 };

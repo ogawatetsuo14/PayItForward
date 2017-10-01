@@ -92,6 +92,7 @@ export class DialogComponent {
 
   send() {
     this.loading = true;
+    this.model.datetime = Date.now();
     this.coinService.sendCoin(this.model)
         .subscribe(
             data => {

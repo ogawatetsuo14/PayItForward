@@ -1,5 +1,5 @@
 export class Record {
-    datetime: string;
+    datetime: number;
     from: string;
     to: string;
     type: string;

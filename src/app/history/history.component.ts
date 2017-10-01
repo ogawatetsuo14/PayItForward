@@ -20,15 +20,16 @@ export class HistoryComponent implements OnInit {
     private coinService: CoinService,
     private alertService: AlertService
   ) { 
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
-    this.getAllRecords(this.currentUser.email);
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.getAllRecords(this.currentUser.address);
   }
 
-  private getAllRecords(email:string) {
-    this.coinService.getTranByEmail(email)
+  private getAllRecords(address:string) {
+    console.log(address);
+    this.coinService.getTranByAddress(address)
     　　.subscribe(
       　　records => { 
            console.log(records);

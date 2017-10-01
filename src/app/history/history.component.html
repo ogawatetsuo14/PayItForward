@@ -4,7 +4,7 @@
         <tbody>
           <th>日時</th><th>送信者</th><th>タイプ</th><th>ポイント</th><th>コメント</th>
           <tr *ngFor="let record of records;" align="center">
-            <td>{{record.datetime}}</td><td>{{record.from}}</td><td>{{record.type}}</td><td>{{record.amount}}</td><td>{{record.comment}}</td>
+            <td>{{record.datetime | date:'medium'}}</td><td>{{record.from}}</td><td>{{record.type}}</td><td>{{record.amount}}</td><td>{{record.comment}}</td>
           </tr>
       </table>
     </div>
