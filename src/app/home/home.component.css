@@ -7,6 +7,14 @@ div.wallet {
     height: 348px;
 }
 
+div.padding {
+  height: 120px;
+}
+
+div.rTooltip {
+    height: 74px;
+}
+
 span {
     text-align:center;
     font-weight: bold;
