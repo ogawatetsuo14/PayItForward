@@ -12,6 +12,7 @@ router.get('/users/:email', (req, res) => {
   console.log("GET /api/users" + req.params.email);
   userService.getUser(req, res);
 });
+
 router.post('/users', (req, res) => {
   console.log("POST /api/users");
   userService.postUser(req, res);
@@ -30,6 +31,12 @@ router.delete('/users/:email', (req, res) => {
 router.post('/authenticate', (req, res) => {
   console.log("POST /api/authenticate");
   userService.authenticate(req, res);
+});
+
+router.post('/send', (req, res) => {
+  console.log("POST /api/send");
+  console.log(req.body);
+  res.status(200).json({"message":"success"});
 });
 
 module.exports = router;

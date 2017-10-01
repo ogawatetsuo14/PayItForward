@@ -11,10 +11,11 @@ import { RegisterComponent } from './register/register.component';
 
 import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService, ModalService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, ModalService, CoinService } from './_services/index';
 import { ModalComponent } from './modal/modal.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { UsersComponent } from './users/users.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UsersComponent } from './users/users.component';
     AlertComponent,
     ModalComponent,
     DialogComponent,
-    UsersComponent
+    UsersComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { UsersComponent } from './users/users.component';
     AlertService,
     AuthenticationService,
     UserService,
-    ModalService
+    ModalService,
+    CoinService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

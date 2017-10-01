@@ -17,7 +17,7 @@
     </div>
     <div class="col-md-12">
       <div class="message">
-        <h4 *ngIf="username">{{username}}さんに "{{type}}"コインを {{amount}} bitoを送ります。</h4>
+        <h4 *ngIf="username">{{username}}さんに "{{model.type}}"コインを {{model.amount}} bitoを送ります。</h4>
       </div>
     </div>
     <div class="col-md-12">
@@ -29,7 +29,7 @@
     <div class="col-md-12">
       <div class="action">
         <button class="btn btn-default" (click)="close()">閉じる</button>
-        <button class="btn btn-success" (click)="send()">送　信</button>
+        <button [disabled]="loading" class="btn btn-success" (click)="send()">送　信</button>
       </div>
     </div>
 </div>
