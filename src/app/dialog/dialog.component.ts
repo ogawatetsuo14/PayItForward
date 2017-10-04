@@ -1,6 +1,7 @@
-import { Component, OpaqueToken, Inject, Input } from '@angular/core';
+import { Component, OpaqueToken, Inject, Input, OnInit } from '@angular/core';
 import { ModalService, UserService, CoinService, AlertService } from '../_services/index';
 import { User } from '../_models/index';
+import { Transaction } from '../_models/index';
 
 export const TOKEN = new OpaqueToken('complete.text');
 
@@ -8,13 +9,16 @@ export const TOKEN = new OpaqueToken('complete.text');
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent {
+export class DialogComponent{
 
   users: User[] =[];
   username: string;
   currentUser: User;
+  to:any = {};
+  from:any = {};
 
   model: any = {};
+  //tran: Transaction;
   loading = true;
 
   constructor(
@@ -24,10 +28,15 @@ export class DialogComponent {
     private coinService: CoinService,
     private alertService: AlertService
   ) {
+    console.log("dialogcomponent's constructor is fired!!")
     this.loadAllUsers();
     this.translate(t);
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.model.from = this.currentUser.address;
+    this.from.username = this.currentUser.username;
+    this.from.address = this.currentUser.address;
+    this.from.company = this.currentUser.company;
+    this.from.email = this.currentUser.email;
+    this.model.from = this.from;
   }
 
   close() {
@@ -107,7 +116,11 @@ export class DialogComponent {
 
   select(num){
     this.loading = false;
-    this.model.to = this.users[num].address;
+    this.to.address = this.users[num].address;
+    this.to.username = this.users[num].username;
+    this.to.email = this.users[num].email;
+    this.to.company = this.users[num].company;
+    this.model.to = this.to;
     this.username = this.users[num].username;
     console.log("Name is " + this.username);
   }

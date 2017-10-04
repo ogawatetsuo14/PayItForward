@@ -5,17 +5,19 @@ const ReadPreference = require('mongodb').ReadPreference;
 require('./mongo').connect();
 
 function postTran(req, res) {
-  const received = { 
-    datetime: req.body.datetime, 
-    from: req.body.from, 
-    to: req.body.to ,
-    type: req.body.type , 
-    amount: req.body.amount,
-    comment: req.body.comment
-  };
-  console.log("postTrans is fired!!");
-  console.log(received);
-  const coin = new Coin(received);
+  const coin = new Coin();
+  coin.datetime = req.body.datetime;
+  coin.fusername = req.body.from.username;
+  coin.faddress = req.body.from.address;
+  coin.femail = req.body.from.email;
+  coin.fcompany = req.body.from.company;
+  coin.tusername = req.body.to.username;
+  coin.taddress = req.body.to.address;
+  coin.temail = req.body.to.email;
+  coin.tcompany = req.body.to.company;
+  coin.type = req.body.type;
+  coin.amount = req.body.amount;
+  coin.comment = req.body.comment;
   coin.save(error => {
     if (checkServerError(res, error)) return;
     res.status(201).json(coin);
@@ -25,7 +27,7 @@ function postTran(req, res) {
 
 function getTran(req, res, to) {
   console.log(to)
-  Coin.find({ "to": to }).
+  Coin.find({ "taddress": to }).
     limit(15).
     sort({datetime: -1}).
     exec(function(error, records) {
