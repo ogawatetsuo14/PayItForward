@@ -1,11 +1,20 @@
 <div class="col-md-12">
+  <div class="histroybtn">
+    <button [disabled]="loading" class="btn btn-default" (click)="getRecievedRecords()">受信ログ</button>
+    <button [disabled]="loading" class="btn btn-default" (click)="getSentRecords()">送信ログ</button>
+  </div>
+</div>
+<div class="col-md-12">
     <div class="records">
-      <table class="table-condensed">
+      <table class="table table-striped table-hover">
+        <tr>
+          <th>日時</th><th>受信者</th><th>送信者</th><th>タイプ</th><th>ポイント</th><th>コメント</th>
+        </tr>
         <tbody>
-          <th>日時</th><th>送信者</th><th>タイプ</th><th>ポイント</th><th>コメント</th>
           <tr *ngFor="let record of records;" align="center">
-            <td>{{record.datetime | date:'medium'}}</td><td>{{record.from.username}}</td><td>{{record.type}}</td><td>{{record.amount}}</td><td>{{record.comment}}</td>
+            <td>{{record.datetime | date:'medium'}}</td><td>{{record.tusername}}</td><td>{{record.fusername}}</td><td>{{record.type}}</td><td>{{record.amount}}</td><td>{{record.comment}}</td>
           </tr>
+        </tbody>
       </table>
     </div>
   </div>

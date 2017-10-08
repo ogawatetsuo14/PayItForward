@@ -12,10 +12,16 @@ export class CoinService {
         return this.http.post('api/send',tran, this.jwt()).map((response:Response) => response.json());
     }
 
-    getTranByAddress(address: string){
-      console.log("getTranByEmail is fired!!");
+    getTranByTaddress(address: string){
+      console.log("getTranByTaddress is fired!!");
       console.log(address);
-      return this.http.get('/api/getrecords/'+ address,this.jwt()).map((response:Response) => response.json());
+      return this.http.get('/api/getrcvrecords/'+ address,this.jwt()).map((response:Response) => response.json());
+    }
+
+    getTranByFaddress(address: string){
+        console.log("getTranByFaddress is fired!!");
+        console.log(address);
+        return this.http.get('/api/getsntrecords/'+ address,this.jwt()).map((response:Response) => response.json());
     }
 
     // private helper methods

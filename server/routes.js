@@ -49,9 +49,14 @@ router.post('/send', (req, res) => {
   coinService.postTran(req,res);
 });
 
-router.get('/getrecords/:to', (req, res) => {
-  console.log("GET /api/getrecords/" + req.params.to);
-  coinService.getTran(req,res,req.params.to);
+router.get('/getrcvrecords/:taddress', (req, res) => {
+  console.log("GET /api/getrcvrecords/" + req.params.taddress);
+  coinService.getTranByTadd(req,res,req.params.taddress);
+});
+
+router.get('/getsntrecords/:faddress', (req, res) => {
+  console.log("GET /api/getsntrecords/" + req.params.faddress);
+  coinService.getTranByFadd(req,res,req.params.faddress);
 });
 
 module.exports = router;

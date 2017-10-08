@@ -25,9 +25,9 @@ function postTran(req, res) {
   });
 }
 
-function getTran(req, res, to) {
-  console.log(to)
-  Coin.find({ "taddress": to }).
+function getTranByTadd(req, res, taddress) {
+  console.log(taddress)
+  Coin.find({ "taddress": taddress }).
     limit(15).
     sort({datetime: -1}).
     exec(function(error, records) {
@@ -35,6 +35,21 @@ function getTran(req, res, to) {
       if (!checkFound(res, records)) return;
       res.status(200).json(records);
       console.log('getTran is exec successfully!');
+      console.log(records);
+  });
+}
+
+function getTranByFadd(req, res, faddress) {
+  console.log(faddress)
+  Coin.find({ "faddress": faddress }).
+    limit(15).
+    sort({datetime: -1}).
+    exec(function(error, records) {
+      if (checkServerError(res, error)) return;
+      if (!checkFound(res, records)) return;
+      res.status(200).json(records);
+      console.log('getTran is exec successfully!');
+      console.log(records);
   });
 }
 
@@ -55,5 +70,6 @@ function checkFound(res, records) {
   
 module.exports = {
     postTran,
-    getTran
+    getTranByFadd,
+    getTranByTadd
 };

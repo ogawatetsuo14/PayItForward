@@ -132,13 +132,40 @@
           ],
           "name": "Transfer",
           "type": "event"
+        },
+        "0xcd6e659e4c2e75c3bfe47fecaccf39aeb368116a0ee52afb532e07f6cba6c0d1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "commnet",
+              "type": "string"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x0e857f78ea0c0e9b3111c74b881d0da778424d92",
-      "updated_at": 1506796750655
+      "address": "0x8a5e2a6343108babed07899510fb42297938d41f",
+      "updated_at": 1507433356980
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1507043035177
+  "updated_at": 1507433356980
 }

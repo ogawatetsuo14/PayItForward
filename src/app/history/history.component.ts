@@ -10,7 +10,7 @@ import { User, Record } from '../_models/index';
 })
 export class HistoryComponent implements OnInit {
 
-  loading = true;
+  loading = false;
   currentUser: User;
 
   records: Record[] = [];
@@ -24,12 +24,11 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.getAllRecords(this.currentUser.address);
   }
 
-  private getAllRecords(address:string) {
-    console.log(address);
-    this.coinService.getTranByAddress(address)
+  private getRecievedRecords() {
+    console.log(this.currentUser.address);
+    this.coinService.getTranByTaddress(this.currentUser.address)
     　　.subscribe(
       　　records => { 
            console.log(records);
@@ -37,7 +36,22 @@ export class HistoryComponent implements OnInit {
     　　  },
           error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.loading = true;
+          }
+        );
+  }
+
+  private getSentRecords() {
+    console.log(this.currentUser.address);
+    this.coinService.getTranByFaddress(this.currentUser.address)
+    　　.subscribe(
+      　　records => { 
+           console.log(records);
+      　　　this.records = records; 
+    　　  },
+          error => {
+            this.alertService.error(error);
+            this.loading = true;
           }
         );
   }
