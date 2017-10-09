@@ -1,9 +1,11 @@
 const User = require('./user.model');
 const ReadPreference = require('mongodb').ReadPreference;
 const web3Ex = require('./web3ex');
+const Web3 = require('./web3');
 
 require('./mongo').connect();
 const web3ex = web3Ex.connect();
+const web3 = Web3.connect();
 
 function getUsers(req, res) {
   const docquery = User.find({}).read(ReadPreference.NEAREST);
@@ -33,15 +35,42 @@ function getUser(req, res){
 
 function getAddress(req,res){
   return new Promise(function(resolve,reject) {
-    web3ex.personal.newAccount(req.params.password,function(error,result){
+    web3ex.personal.newAccount(req.body.password,function(error,result){
       if(!error) {
         console.log("getAddress is fired!!");
-        console.log(result);
         resolve(result);
       } else {
         reject(error);
       }
     });
+  })
+}
+
+function unlockAccount(req,res){
+  var address = req.body.from.address;
+  var password = "123";
+  return new Promise(function(resolve,reject) {
+    web3ex.personal.unlockAccount(address,password,60,function(error,result){
+      if(!error) {
+        console.log("unlockAccount is fired!!");
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
+  })
+}
+
+function getEther(address){
+  var reciever = address;
+  console.log("getEther is fired with " + reciever);
+  web3.eth.sendTransaction({from:web3.eth.coinbase,to:reciever,value: web3.toWei(10, "ether")},function(error,result){
+    if(!error) {
+      console.log(result);
+      console.log("getEther is completed");
+    } else {
+      console.log("error: " + error);
+    }
   })
 }
 
@@ -135,5 +164,7 @@ module.exports = {
   putUser,
   deleteUser,
   authenticate,
-  getAddress
+  getAddress,
+  unlockAccount,
+  getEther
 };

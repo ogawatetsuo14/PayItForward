@@ -1,42 +1,22 @@
 pragma solidity ^0.4.8;
 
 contract PayItForward {
+  mapping(address => uint) recieved;
+  mapping(address => uint) sent;
 
-  struct coin {
-    uint amount;
-    string comment;
+  function PayItForward() {
   }
 
-  mapping (address => coin) recieved;
-  mapping (address => coin) sent;
-
-  event Transfer(address to,address from,uint amount,string commnet);
-
-  function PayItForward(){
-  
+  function sendCoin(address to,address from,uint x) {
+    recieved[to] += x;
+    sent[from] += x;
   }
 
-  function newAccount() returns (bool){
-	  recieved[msg.sender].amount = 0;
-	  sent[msg.sender].amount = 0;
-	  return true;
+  function getRecieved(address from) constant returns (uint retVal) {
+    return recieved[from];
   }
 
-  function getRecieved() returns (uint,string) {
-    return (recieved[msg.sender].amount,recieved[msg.sender].comment);
-  }
-
-  function getSent() returns (uint,string) {
-    return (sent[msg.sender].amount,sent[msg.sender].comment);
-  }
-
-  function sendPoint(address to,uint points,string comment) returns (bool) {
-    if (points < 0) return false;
-    sent[msg.sender].amount += points;
-    sent[msg.sender].comment = comment;
-	  recieved[to].amount += points;
-    recieved[to].comment = comment;
-	  Transfer(to,msg.sender,points,comment);
-	  return true;
+    function getSent(address from) constant returns (uint retVal) {
+    return sent[from];
   }
 }

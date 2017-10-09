@@ -1,8 +1,19 @@
 const Coin = require('./coin.model');
 const ReadPreference = require('mongodb').ReadPreference;
+const TruffleContract = require("truffle-contract");
+var PayItForward = require("../build/contracts/PayItForward.json");
+const Web3 = require('./web3');
 // const ethService = require('./eth.service');
 
 require('./mongo').connect();
+const web3 = Web3.connect();
+var PIF = TruffleContract(PayItForward);
+PIF.setProvider(web3.currentProvider);
+PIF.defaults({
+  from: web3.eth.coinbase,
+  gas: "900000",
+  gasPrice: web3.eth.gasPrice
+});
 
 function postTran(req, res) {
   const coin = new Coin();
@@ -19,8 +30,6 @@ function postTran(req, res) {
   coin.amount = req.body.amount;
   coin.comment = req.body.comment;
   coin.save(error => {
-    if (checkServerError(res, error)) return;
-    res.status(201).json(coin);
     console.log('Record is created successfully!');
   });
 }
@@ -67,9 +76,68 @@ function checkFound(res, records) {
   }
     return records;
 }
-  
+
+function sendCoin(req,res){
+  var to = req.body.to.address;
+  var from = req.body.from.address;
+  var amount = req.body.amount;
+  var comment = req.body.comment;
+  console.log("sendCoin is fired!!");
+  PIF.deployed().then(function(instance){
+    return instance.sendCoin(to,from,amount,{from: from},{privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="]});
+  }).then(function(result) {
+    res.status(201).json(result.tx);
+    console.log("Transaction: " + result.tx);
+  }).catch(function(e){
+    console.log("sendCoin's error: " + e);
+  });
+};
+
+function newAccount(req,res){
+  var from = req.body.from.address;
+  console.log("newAccount is fired!!");
+  PIF.deployed().then(function(instance){
+    return instance.newAccount({from: from},{privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="]});
+  }).then(function(result) {
+    res.status(201).json(result.tx);
+    console.log("Transaction: " + result);
+  }).catch(function(e){
+    console.log("newAccount's error: " + e);
+  });
+};
+
+function getRecieved(req,res,address){
+  var from = address;
+  console.log("getRecieved is fired with "+ from);
+  PIF.deployed().then(function(instance){
+    return instance.getRecieved(from,{from: from},{privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="]});
+  }).then(function(result) {
+    res.status(201).json(result);
+    console.log("getRecieved: " + result);
+  }).catch(function(e){
+    console.log("getRecieved's error: " + e);
+  });
+};
+
+function getSent(req,res,address){
+  var from = address;
+  console.log("getSent is fired with "+from);
+  PIF.deployed().then(function(instance){
+    return instance.getSent(from,{from: from},{privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="]});
+  }).then(function(result) {
+    res.status(201).json(result);
+    console.log("getSent: " + result);
+  }).catch(function(e){
+    console.log("getSent's error: " + e);
+  });
+};
+
 module.exports = {
     postTran,
     getTranByFadd,
-    getTranByTadd
+    getTranByTadd,
+    sendCoin,
+    newAccount,
+    getRecieved,
+    getSent
 };

@@ -24,6 +24,19 @@ export class CoinService {
         return this.http.get('/api/getsntrecords/'+ address,this.jwt()).map((response:Response) => response.json());
     }
 
+    getRecieved(address){
+        console.log("getRecieved is fired!!");
+        console.log(address);
+        return this.http.get('/api/getrecieved/'+ address,this.jwt()).map((response:Response) => response.json());
+    }
+
+
+    getSent(address){
+        console.log("getSent is fired!!");
+        console.log(address);
+        return this.http.get('/api/getsent/'+ address,this.jwt()).map((response:Response) => response.json());
+    }
+
     // private helper methods
     private jwt() {
         // create authorization header with jwt token

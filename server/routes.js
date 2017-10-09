@@ -16,12 +16,12 @@ router.get('/users/:email', (req, res) => {
 
 router.post('/users', (req, res) => {
   console.log("POST /api/users");
-  //userService.postUser(req, res);
   userService.getAddress(req,res)
   .then((value)=>{
     console.log(value);
     req.body.address = value;
-    userService.postUser(req,res);  
+    userService.postUser(req,res);
+    userService.getEther(value);
   })
   .catch((e) => {
     console.log(e);
@@ -46,7 +46,15 @@ router.post('/authenticate', (req, res) => {
 router.post('/send', (req, res) => {
   console.log("POST /api/send");
   console.log(req.body);
-  coinService.postTran(req,res);
+  userService.unlockAccount(req,res)
+  .then((value) =>{
+    //if (value) return "Failed to unlock account";
+    coinService.postTran(req,res);
+    coinService.sendCoin(req,res);
+  })
+  .catch((e) => {
+    console.log(e);
+  })
 });
 
 router.get('/getrcvrecords/:taddress', (req, res) => {
@@ -57,6 +65,16 @@ router.get('/getrcvrecords/:taddress', (req, res) => {
 router.get('/getsntrecords/:faddress', (req, res) => {
   console.log("GET /api/getsntrecords/" + req.params.faddress);
   coinService.getTranByFadd(req,res,req.params.faddress);
+});
+
+router.get('/getrecieved/:address', (req, res) => {
+  console.log("GET /api/getrecieved/" + req.params.address);
+  coinService.getRecieved(req,res,req.params.address);
+});
+
+router.get('/getsent/:address', (req, res) => {
+  console.log("GET /api/getsent/" + req.params.address);
+  coinService.getSent(req,res,req.params.address);
 });
 
 module.exports = router;
