@@ -3,6 +3,12 @@ div.top-bar{
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: rgb(255, 204, 153);
+}
+
+div.switch-img {
+    text-align: left;
+}
+div.logoff {
     text-align: right;
 }
 

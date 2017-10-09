@@ -3,7 +3,17 @@
   <div class="col-md-12">
       <alert></alert>
       <div class ="top-bar" >
-        <a class="name" *ngIf="currentUser" [routerLink]="['/login']"> {{currentUser.username}}</a>
+        <div class="col-md-6">
+          <div class="switch-img">
+            <img alt="top_page" src="../assets/top_page.png" [routerLink]="['']">
+            <img alt="your_records" src="../assets/your_records.png" [routerLink]="['/history']">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="logoff">
+            <a class="name" *ngIf="currentUser" [routerLink]="['/login']"> {{currentUser.username}}</a>
+          </div>
+        </div>
       </div>
       <div class="title-image">
           <img style="width: 57px; height: 45px;" alt="Heart" src="../assets/heart1.jpg">
