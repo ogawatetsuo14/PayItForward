@@ -26,7 +26,7 @@ export class HistoryComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  private getRecievedRecords() {
+  getRecievedRecords() {
     console.log(this.currentUser.address);
     this.coinService.getTranByTaddress(this.currentUser.address)
     　　.subscribe(
@@ -41,7 +41,7 @@ export class HistoryComponent implements OnInit {
         );
   }
 
-  private getSentRecords() {
+  getSentRecords() {
     console.log(this.currentUser.address);
     this.coinService.getTranByFaddress(this.currentUser.address)
     　　.subscribe(
