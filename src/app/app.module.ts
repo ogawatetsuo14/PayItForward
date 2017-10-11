@@ -16,6 +16,7 @@ import { ModalComponent } from './modal/modal.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { UsersComponent } from './users/users.component';
 import { HistoryComponent } from './history/history.component';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HistoryComponent } from './history/history.component';
     ModalComponent,
     DialogComponent,
     UsersComponent,
-    HistoryComponent
+    HistoryComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,

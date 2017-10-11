@@ -1,9 +1,11 @@
 var web3_extended = require('web3_extended');
+const env = require('./env/environment');
 
+const quorumUri = `http://${env.quorumAddress}.:${env.quorumPort}`;
 
 function connect() {
   var options = {
-    host: 'http://52.230.18.254:22000',
+    host: quorumUri,
     personal: true,
     admin: true,
     debug: false

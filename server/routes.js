@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userService = require('./user.service');
 const coinService = require('./coin.service');
+const quorumService = require('./quorum.service');
 
 router.get('/users', (req, res) => {
   console.log("GET /api/users");
@@ -45,12 +46,10 @@ router.post('/authenticate', (req, res) => {
 
 router.post('/send', (req, res) => {
   console.log("POST /api/send");
-  console.log(req.body);
   userService.unlockAccount(req,res)
   .then((value) =>{
-    //if (value) return "Failed to unlock account";
     coinService.postTran(req,res);
-    coinService.sendCoin(req,res);
+    quorumService.sendCoin(req,res);
   })
   .catch((e) => {
     console.log(e);
@@ -67,14 +66,29 @@ router.get('/getsntrecords/:faddress', (req, res) => {
   coinService.getTranByFadd(req,res,req.params.faddress);
 });
 
+router.get('/getallrecords', (req, res) => {
+  console.log("GET /api/getallrecords/");
+  coinService.getTranAll(req,res);
+});
+
+router.get('/getrcv10records', (req, res) => {
+  console.log("GET /api/getrcv10records/");
+  coinService.getTranRcv10(req,res);
+});
+
+router.get('/getsnt10records', (req, res) => {
+  console.log("GET /api/getsnt10records/");
+  coinService.getTranSnt10(req,res);
+});
+
 router.get('/getrecieved/:address', (req, res) => {
   console.log("GET /api/getrecieved/" + req.params.address);
-  coinService.getRecieved(req,res,req.params.address);
+  quorumService.getRecieved(req,res,req.params.address);
 });
 
 router.get('/getsent/:address', (req, res) => {
   console.log("GET /api/getsent/" + req.params.address);
-  coinService.getSent(req,res,req.params.address);
+  quorumService.getSent(req,res,req.params.address);
 });
 
 module.exports = router;

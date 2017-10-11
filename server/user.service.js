@@ -70,6 +70,7 @@ function getEther(address){
       console.log("getEther is completed");
     } else {
       console.log("error: " + error);
+      res.status(500).send(error);
     }
   })
 }
