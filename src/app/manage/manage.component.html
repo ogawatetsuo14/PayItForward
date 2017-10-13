@@ -10,24 +10,10 @@
           <th>#</th><th>日時</th><th>受信者</th><th>送信者</th><th>タイプ</th><th>ポイント</th><th>コメント</th>
         </tr>
         <tbody>
-          <tr *ngFor="let record of records; let i=index" align="center">
-            <td>{{i+1}}</td><td>{{rcv10.datetime | date:'medium'}}</td><td>{{rcv10.tusername}}</td><td>{{rcv10.fusername}}</td><td>{{rcv10.type}}</td><td>{{rcv10.amount}}</td><td>{{rcv10.comment}}</td>
+          <tr *ngFor="let all100 of all100s; let i=index" align="center">
+            <td>{{i+1}}</td><td>{{all100.datetime | date:'medium'}}</td><td>{{all100.tusername}}</td><td>{{all100.fusername}}</td><td>{{all100.type}}</td><td>{{all100.amount}}</td><td>{{all100.comment}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="col-md-12">
-    <div class="records">
-      <table class="table table-striped table-hover">
-        <tr>
-          <th>#</th><th>日時</th><th>受信者</th><th>送信者</th><th>タイプ</th><th>ポイント</th><th>コメント</th>
-        </tr>
-        <tbody>
-          <tr *ngFor="let record of records; let i=index" align="center">
-            <td>{{i+1}}</td><td>{{snt10.datetime | date:'medium'}}</td><td>{{snt10.tusername}}</td><td>{{snt10.fusername}}</td><td>{{snt10.type}}</td><td>{{snt10.amount}}</td><td>{{snt10.comment}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+</div>

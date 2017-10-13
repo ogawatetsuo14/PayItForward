@@ -29,14 +29,9 @@ export class CoinService {
         return this.http.get('/api/getallrecords',this.jwt()).map((response:Response) => response.json());
     }
 
-    getTranSnt10(){
-        console.log("getTranSnt10 is fired!!");
-        return this.http.get('/api/getsnt10records',this.jwt()).map((response:Response) => response.json());
-    }
-
-    getTranRcv10(){
-        console.log("getTranRcv10 is fired!!");
-        return this.http.get('/api/getrcv10records',this.jwt()).map((response:Response) => response.json());
+    getTranAll100(){
+        console.log("getTranAll100 is fired!!");
+        return this.http.get('/api/getall100records',this.jwt()).map((response:Response) => response.json());
     }
 
     getRecieved(address){

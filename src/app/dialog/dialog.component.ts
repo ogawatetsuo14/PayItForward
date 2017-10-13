@@ -85,11 +85,11 @@ export class DialogComponent{
         this.model.amount = 5;
         this.model.type = '元気玉';
         break;
-      case 'gb10':
+      case 'gk10':
         this.model.amount = 10;
         this.model.type = '元気玉';
         break;
-      case 'gb15':
+      case 'gk15':
         this.model.amount = 15;
         this.model.type = '元気玉';
         break;
@@ -102,6 +102,9 @@ export class DialogComponent{
   send() {
     this.loading = true;
     this.model.datetime = Date.now();
+    if (this.model.comment === undefined){
+      this.model.comment = " ";
+    }
     this.coinService.sendCoin(this.model)
         .subscribe(
             data => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, CoinService } from '../_services/index';
 import { Record } from '../_models/index';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 @Component({
   selector: 'app-manage',
@@ -11,22 +12,20 @@ export class ManageComponent implements OnInit {
 
   loading = false;
 
-  rcv10: Record[] = [];
-  snt10: Record[] = [];
+  all100s: Record[] = [];
   alllog: Record[] = [];
 
   constructor(private coinService: CoinService,private alertService: AlertService) { }
 
   ngOnInit() {
-    this.getRcv10Records();
-    this.getSnt10Records();
+    this.getAll100Records();
   }
 
-  getRcv10Records() {
-    this.coinService.getTranRcv10()
+  getAll100Records() {
+    this.coinService.getTranAll100()
     　　.subscribe(
       　　records => { 
-      　　　this.rcv10 = records; 
+      　　　this.all100s = records; 
     　　  },
           error => {
             this.alertService.error(error);
@@ -35,24 +34,12 @@ export class ManageComponent implements OnInit {
         );
   }
 
-  getSnt10Records() {
-    this.coinService.getTranSnt10()
-    　　.subscribe(
-      　　records => { 
-      　　　this.snt10 = records; 
-    　　  },
-          error => {
-            this.alertService.error(error);
-            this.loading = true;
-          }
-        );
-  }
 
   getAllRecords() {
     this.coinService.getTranAll()
     　　.subscribe(
       　　records => { 
-      　　　this.alllog = records; 
+      　　　new Angular2Csv(records,'payitforward.log',{headers: Object.keys(records[0])}); 
     　　  },
           error => {
             this.alertService.error(error);

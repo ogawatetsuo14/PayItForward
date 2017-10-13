@@ -58,31 +58,15 @@ function getTranAll(req, res) {
   });
 }
 
-function getTranRcv10(req, res) {
-  Coin.aggregate([
-    { "$group": { _id: "$taddress", num: {$sum:1}, total: {$sum: "$amount"},avg: {$avg: "$amount"}}}
-    ], function (err,result){
-    if (err) {
-      console.log(err);
-      res.status(500).json(err);
-      return;
-    }
-    console.log(result);
-    res.status(200).json(result);
-  });
-}
-
-function getTranSnt10(req, res) {
-  Coin.aggregate([
-    { "$group": { _id: "$faddress", num: {$sum:1}, total: {$sum: "$amount"},avg: {$avg: "$amount"}}}
-    ], function (err,result){
-    if (err) {
-      console.log(err);
-      res.status(500).json(err);
-      return;
-    }
-    console.log(result);
-    res.status(200).json(result);
+function getTranAll100(req, res) {
+  Coin.find().
+  limit(100).
+  sort({datetime: -1}).
+  exec(function(error, records) {
+    if (checkServerError(res, error)) return;
+    if (!checkFound(res, records)) return;
+    res.status(200).json(records);
+    console.log('getTranAll100 is exec successfully!');
   });
 }
 
@@ -106,6 +90,5 @@ module.exports = {
     getTranByFadd,
     getTranByTadd,
     getTranAll,
-    getTranRcv10,
-    getTranSnt10
+    getTranAll100
 };

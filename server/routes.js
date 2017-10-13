@@ -71,14 +71,9 @@ router.get('/getallrecords', (req, res) => {
   coinService.getTranAll(req,res);
 });
 
-router.get('/getrcv10records', (req, res) => {
-  console.log("GET /api/getrcv10records/");
-  coinService.getTranRcv10(req,res);
-});
-
-router.get('/getsnt10records', (req, res) => {
-  console.log("GET /api/getsnt10records/");
-  coinService.getTranSnt10(req,res);
+router.get('/getall100records', (req, res) => {
+  console.log("GET /api/getall100records/");
+  coinService.getTranAll100(req,res);
 });
 
 router.get('/getrecieved/:address', (req, res) => {
