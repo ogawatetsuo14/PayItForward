@@ -5,6 +5,9 @@ const routes = require('./routes');
 const publicweb = './dist';
 const app = express();
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(publicweb));
@@ -25,3 +28,13 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || '3000';
 app.listen(port, () => console.log(`API running on localhost:${port}`));
+
+
+io.on('connection',(socket) =>{
+  console.log('user connected');
+
+  socket.on('disconnect',function(){
+    console.log('user disconnected');
+  })
+  
+})

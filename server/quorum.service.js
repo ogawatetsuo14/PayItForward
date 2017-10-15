@@ -2,6 +2,7 @@ const TruffleContract = require("truffle-contract");
 var PayItForward = require("../build/contracts/PayItForward.json");
 const Web3 = require('./web3');
 
+//const contract_address = '0xd94f30d9f387a55cd3278bce66e7e687186c1cf3';
 const web3 = Web3.connect();
 var PIF = TruffleContract(PayItForward);
 PIF.setProvider(web3.currentProvider);
@@ -10,6 +11,16 @@ PIF.defaults({
   gas: "900000",
   gasPrice: web3.eth.gasPrice
 });
+
+/***************************************
+var event = PIF.send;
+event.watch(function(error,result){
+  console.log("watching send is fired!!");
+  if (!error){
+    console.log(result);
+  }
+})
+***************************************/
 
 function sendCoin(req,res){
   var to = req.body.to.address;
